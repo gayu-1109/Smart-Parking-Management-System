@@ -51,7 +51,7 @@ The system also includes an admin dashboard for managing parking areas and booki
 ### 🏠 Search City Page (Home Page)
 ![Search City Page](screenshots/home.png)
 
-### 🚗 Parking Results & Available Slots
+### 🚗 Parking Results & Total Slots
 ![Parking Results](screenshots/parking-results.png)
 
 ### 📅 Time Selection
@@ -64,7 +64,9 @@ The system also includes an admin dashboard for managing parking areas and booki
 ![Booking Ticket](screenshots/ticket.png)
 
 ### ✅ Check-In & Check-Out
+
 ![Check In](screenshots/checkin.png)
+
 ![Check Out](screenshots/checkout.png)
 
 ### 🧑‍💼 Admin Dashboard
