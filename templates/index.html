@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Parking | Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">SmartParking</div>
+    <ul class="nav-links">
+      <li><a href="{{ url_for('index') }}">Home</a></li>
+      <li><a href="#">Reservations</a></li>
+      <li><a href="{{ url_for('login') }}">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <h1>Find & Book Your Parking Slot Easily</h1>
+    <p>Save time, fuel, and stress with Smart Parking</p>
+    <form class="search-bar" method="POST" action="{{ url_for('index') }}">
+      <input type="text" name="city" placeholder="Search city or parking location..." required>
+      <button type="submit">Search</button>
+    </form>
+  </header>
+
+  <!-- Results Section -->
+  {% if city %}
+  <section class="featured">
+    <h2>Parking Slots in {{ city.title() }}</h2>
+    <div class="card-grid">
+      {% if results %}
+      {% for slot in results %}
+      <div class="card">
+        <h3>{{ slot.name }}</h3>
+        <p>Total Parking Slots: {{ slot.slots }}</p>
+        {% if slot.slots > 0 %}
+        <form action="{{ url_for('select_time', slot_id=slot.slot_id, city_id=slot.city_id) }}" method="GET">
+          <button type="submit">Book Now</button>
+        </form>
+        {% else %}
+        <button disabled>Full</button>
+        {% endif %}
+      </div>
+      {% endfor %}
+      {% else %}
+      <p>No parking slots available in {{ city.title() }}</p>
+      {% endif %}
+    </div>
+  </section>
+  {% endif %}
+
+</body>
+
+</html>

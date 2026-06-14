@@ -1,0 +1,101 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Parking Area</title>
+
+    <style>
+        /* ===== Edit Parking Area Form ===== */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto 50px auto;
+            padding: 25px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            /* background-color: #007BFF; */
+            background: linear-gradient(90deg, #ff3d00, #ff7043);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(90deg, #ff7043, #ff3d00)
+        }
+
+        @media screen and (max-width: 600px) {
+            form {
+                padding: 20px;
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+
+
+<h2>Edit Parking Area</h2>
+
+<form method="POST">
+    <label>Area Name:</label><br>
+    <input type="text" name="name" value="{{ area.name }}" required><br><br>
+
+    <label>Total Slots:</label><br>
+    <input type="number" name="slots" value="{{ area.slots }}" required><br><br>
+
+    <label>City:</label><br>
+    <select name="city_id" required>
+        {% for city in cities %}
+        <option value="{{ city.city_id }}" {% if city.city_id==area.city_id %}selected{% endif %}>
+            {{ city.city_name }}
+        </option>
+        {% endfor %}
+    </select><br><br>
+
+    <button type="submit">Update</button>
+</form>

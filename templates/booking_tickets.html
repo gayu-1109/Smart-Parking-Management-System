@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Parking Ticket</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .ticket {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 420px;
+      padding: 20px;
+      margin: 15px;
+      text-align: center;
+    }
+
+    .ticket h2 {
+      color: #222;
+      margin-bottom: 10px;
+    }
+
+    .info {
+      text-align: left;
+      font-size: 15px;
+      margin: 10px 0;
+      color: #444;
+    }
+
+    .qr img {
+      width: 150px;
+      margin: 10px 0;
+    }
+
+    .footer {
+      font-size: 12px;
+      color: #666;
+      margin-top: 15px;
+      border-top: 1px dashed #aaa;
+      padding-top: 8px;
+    }
+
+    .btn {
+      margin-top: 15px;
+      background: #ff3d00;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #e53935;
+    }
+  </style>
+</head>
+<body>
+  {% for booking in bookings %}
+  <div class="ticket">
+    <h2>Your Parking Ticket</h2>
+    <div class="info">
+      <p><b>Booking ID:</b> {{ booking.booking_no }}</p>
+      <p><b>Slot:</b> {{ booking.slot_label }}</p>
+      <p><b>Location:</b> {{ location }}</p>
+      <p><b>Date:</b> {{ date }}</p>
+      <p><b>Time:</b> {{ start }} - {{ end }}</p>
+    </div>
+    <div class="qr">
+      <img src="{{ url_for('static', filename=booking.qr_rel_path) }}" alt="QR Code">
+    </div>
+    <div class="footer">Show this QR code to the security guard at the entry.</div>
+  </div>
+  {% endfor %}
+
+  <button class="btn" onclick="window.print()">Print Ticket</button>
+</body>
+</html>

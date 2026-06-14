@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Your Parking Slot</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      background: #f7f9fc;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .parking-compound {
+      width: 90%;
+      max-width: 1200px;
+      background: #fff;
+      padding: 2rem;
+      border: 6px solid #444;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      position: relative;
+    }
+
+    h2 {
+      color: #111;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .info {
+      font-size: 0.9rem;
+      color: #444;
+      margin-bottom: 1.5rem;
+    }
+
+    .parking-grid {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 1rem;
+      justify-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .slot {
+      width: 90px;
+      height: 70px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #222;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .slot:hover {
+      background: #ff7043;
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    .slot.selected {
+      background: #43a047;
+      color: #fff;
+    }
+
+    .slot.booked {
+      background: #d32f2f;
+      color: #fff;
+      cursor: not-allowed;
+    }
+
+    .road {
+      grid-column: span 8;
+      height: 20px;
+      background: repeating-linear-gradient(to right, #555, #555 20px, #bbb 20px, #bbb 40px);
+      border-radius: 5px;
+      margin: 0.5rem 0;
+    }
+
+    .bottom-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 1rem;
+      padding: 1rem;
+    }
+
+    .bottom-area img {
+      height: 120px;
+      width: auto;
+    }
+
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .legend-box {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+    }
+
+    .available {
+      background: #e0e0e0;
+    }
+
+    .selected {
+      background: #43a047;
+    }
+
+    .booked {
+      background: #d32f2f;
+    }
+
+    button {
+      background: #ff3d00;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 100%;
+      max-width: 720px;
+    }
+
+    button:hover {
+      background: #e53935;
+      transform: scale(1.02);
+    }
+  </style>
+</head>
+
+<body>
+
+  <form method="POST" class="parking-compound">
+    <h2>Select Your Parking Slot</h2>
+    <div class="info">
+      Date: {{ date }} | Time: {{ start }} - {{ end }}
+    </div>
+
+    <div class="parking-grid">
+      {% for slot in slots %}
+      <div class="slot {% if slot.booked %}booked{% endif %}" data-id="{{ slot.id }}">
+        {{ slot.name }}
+      </div>
+      {% if loop.index in [8,16,24] %}
+      <div class="road"></div>
+      {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="bottom-area">
+      <div class="cabin">
+        <img src="{{ url_for('static', filename='security_cabin_optimized.png') }}" alt="Security Cabin">
+        <p>Security Cabin</p>
+      </div>
+      <div class="gate">
+        <img src="{{ url_for('static', filename='gate.png') }}" alt="Entry Gate">
+        <p>Entry Gate</p>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span>
+        <div class="legend-box available"></div> Available
+      </span>
+      <span>
+        <div class="legend-box selected"></div> Selected
+      </span>
+      <span>
+        <div class="legend-box booked"></div> Booked
+      </span>
+    </div>
+
+    <input type="hidden" name="selected_slots" id="selectedSlots">
+    <button type="submit">Confirm Booking</button>
+  </form>
+
+  <script>
+    let selectedSlots = [];
+
+    // Handle slot selection
+    document.querySelectorAll('.slot').forEach(slot => {
+      if (!slot.classList.contains('booked')) {
+        slot.addEventListener('click', () => {
+          const id = slot.dataset.id;
+          if (selectedSlots.includes(id)) {
+            selectedSlots = selectedSlots.filter(s => s !== id);
+            slot.classList.remove('selected');
+          } else {
+            selectedSlots.push(id);
+            slot.classList.add('selected');
+          }
+          document.getElementById('selectedSlots').value = selectedSlots.join(',');
+        });
+      }
+    });
+
+    // Block form submission if no slot selected
+    document.querySelector('form').addEventListener('submit', (e) => {
+      if (selectedSlots.length === 0) {
+        e.preventDefault();
+        alert('Please select at least one slot!');
+      }
+    });
+
+  </script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+4️⃣ Frontend (select_slot.html)
+
+Make sure your slots loop is like this:
+
+<div class="parking-grid">
+  {% for slot in slots %}
+    <div class="slot {% if slot.booked %}booked{% endif %}" data-id="{{ slot.id }}">
+      {{ slot.name }}
+    </div>
+  {% endfor %}
+</div>
+
+
+CSS:
+
+.slot.booked {
+  background: #d32f2f; /* red */
+  color: white;
+  cursor: not-allowed;
+} -->

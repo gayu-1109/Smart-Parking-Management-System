@@ -1,0 +1,177 @@
+/* css for admin_dashboard.html */
+
+
+/* ===== Admin Dashboard UI ===== */
+
+.admin-body {
+    background: linear-gradient(120deg, #eef2f3, #dfe9f3);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.admin-container {
+    padding: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+
+.section-title {
+    margin-top: 40px;
+    margin-bottom: 15px;
+    color: #222;
+    border-left: 5px solid #4f46e5;
+    padding-left: 10px;
+}
+
+/* Cards */
+.card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Form */
+.form-card div {
+    margin-bottom: 15px;
+}
+
+.input-box {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.input-box:focus {
+    border-color: #4f46e5;
+}
+
+/* Button */
+.btn-primary {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background: #4338ca;
+}
+
+/* Tables */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.data-table th {
+    background: #4f46e5;
+    color: white;
+    padding: 12px;
+}
+
+.data-table td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.data-table tr:hover {
+    background: #f1f5f9;
+}
+
+/* Flash Messages */
+.alert.success {
+    background: #dcfce7;
+    color: #166534;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.alert.error {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* ================= Attractive Tables ================= */
+
+.data-table,
+.table-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Table Header */
+.data-table th,
+.table-section table th {
+    background: linear-gradient(90deg, #ff3d00, #ff7043);
+    color: #ffffff;
+    padding: 15px;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Table Cells */
+.data-table td,
+.table-section table td {
+    padding: 14px;
+    text-align: center;
+    font-size: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Zebra rows */
+.data-table tr:nth-child(even),
+.table-section table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Hover effect */
+.data-table tr:hover,
+.table-section table tr:hover {
+    background-color: #fff3e0;
+    transition: 0.3s;
+}
+
+/* Remove default borders */
+.data-table,
+.data-table th,
+.data-table td,
+.table-section table,
+.table-section table th,
+.table-section table td {
+    border: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .data-table th,
+    .data-table td {
+        padding: 10px;
+        font-size: 14px;
+    }
+}

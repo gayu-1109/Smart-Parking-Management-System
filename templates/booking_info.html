@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Info</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Booking Details</h2>
+    <p><b>Booking No:</b> {{ booking.booking_no }}</p>
+    <p><b>Name:</b> {{ booking.name }}</p>
+    <p><b>Vehicle:</b> {{ booking.vehicle_no }}</p>
+    <p><b>Email:</b> {{ booking.email }}</p>
+    <p><b>Phone:</b> {{ booking.phone }}</p>
+    <p><b>Check-in Time:</b> {{ booking.checkin_time or 'Not yet' }}</p>
+    <p><b>Check-out Time:</b> {{ booking.checkout_time or 'Not yet' }}</p>
+</body>
+</html>
