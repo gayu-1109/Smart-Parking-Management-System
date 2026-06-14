@@ -65,9 +65,9 @@ The system also includes an admin dashboard for managing parking areas and booki
 
 ### ✅ Check-In & Check-Out
 
-![Check In](screenshots/checkin.png)
+![Check In](screenshots/checkin.jpeg)
 
-![Check Out](screenshots/checkout.png)
+![Check Out](screenshots/checkout.jpeg)
 
 ### 🧑‍💼 Admin Dashboard
 ![Admin Dashboard](screenshots/admin-dashboard.png)
